@@ -1,6 +1,6 @@
 // SSR => Server Side Rendering
 // 이 페이지는 서버에서 렌더링
-import List from "./_components/List";
+import List from "./components/List";
 
 export default function Home() {
   return (

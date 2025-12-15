@@ -193,7 +193,7 @@ export default function JoinPage() {
               <div className="pt-2">
                 <Button
                   type="submit"
-                //   disabled={!idChecked}
+                  disabled={!idChecked}
                   className="w-full bg-[#05D182] hover:bg-[#04b871] py-6 text-base font-semibold"
                 >
                   가입하기
