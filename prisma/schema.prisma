@@ -27,9 +27,8 @@ datasource db {
 model User{
   id String @id
   password String
+  name     String
   nickname String
-  number String
-  mail String
 }
 
 model Article {
