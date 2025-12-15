@@ -13,9 +13,9 @@
 
 ```
 app/
-├── _components/        # 재사용 컴포넌트
-├── _hooks/            # 커스텀 훅
-├── _lib/              # 유틸리티
+├── components/        # 재사용 컴포넌트
+├── hooks/             # 커스텀 훅
+├── lib/               # 유틸리티
 ├── (dashboard)/       # 대시보드 라우트
 └── (marketing)/       # 마케팅 라우트
 
