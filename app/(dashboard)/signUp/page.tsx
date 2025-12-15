@@ -1,5 +1,6 @@
 "use client";
 
+import Toast from "@/app/components/Toast";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -23,8 +24,8 @@ export default function JoinPage() {
   const [toast, setToast] = useState("");
 
 
-  // Toast handler
-  const showToast = (msg: string) => {
+// Toast handler
+const showToast = (msg: string) => {
     setToast(msg);
     setTimeout(() => setToast(""), 2000);
   };
@@ -37,7 +38,8 @@ export default function JoinPage() {
     }
 
     try {
-      const res = await fetch("/api/check/id", {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+      const res = await fetch(`${API_URL}/auth/check/id`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ uid: userId }),
@@ -74,7 +76,8 @@ export default function JoinPage() {
     }
 
     try {
-      const res = await fetch("/api/add/user", {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+      const res = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -97,7 +100,7 @@ export default function JoinPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="container mx-auto px-4 py-8 max-w-md">
       <main className="w-full max-w-xl">
         <Card className="shadow-xl">
           <CardHeader>
@@ -204,11 +207,7 @@ export default function JoinPage() {
         </Card>
 
         {/* Toast */}
-        {toast && (
-          <div className="fixed bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg bg-gray-900 text-white text-sm shadow-lg">
-            {toast}
-          </div>
-        )}
+        {toast && <Toast message={toast} />}
       </main>
     </div>
   );
