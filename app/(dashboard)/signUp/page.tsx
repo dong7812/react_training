@@ -43,6 +43,7 @@ const showToast = (msg: string) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ uid: userId }),
+        credentials: 'include',
       });
 
       const data = await res.json();
@@ -86,11 +87,12 @@ const showToast = (msg: string) => {
           name: fullName,
           nickName: nickName,
         }),
+        credentials: 'include',
       });
 
       if (res.ok) {
         showToast("회원 가입이 완료되었습니다");
-        setTimeout(() => router.push("/profile"), 1000);
+        setTimeout(() => router.push("/"), 1000);
       } else {
         showToast("회원 가입에 실패했습니다");
       }

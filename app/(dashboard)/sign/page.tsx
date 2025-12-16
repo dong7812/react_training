@@ -31,13 +31,17 @@ const handleLogin = async (e: React.FormEvent) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ uid: userId , password : password}),
+      credentials: 'include',  // 쿠키 전송/수신 허용
     });
 
     const data = await res.json();
 
     if (data.ok) {
       showToast("로그인 완료");
-      router.push('/');
+      // 완전한 페이지 리로드로 Navbar가 다시 마운트되어 인증 상태 확인
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
     } else {
       showToast("로그인 확인 필요");
     }
@@ -87,14 +91,6 @@ const handleLogin = async (e: React.FormEvent) => {
           </form>
 
           <div className="mt-6 flex justify-center items-center gap-4 text-sm text-muted-foreground">
-            <Link href="/reset-password" className="hover:text-primary hover:underline">
-              비밀번호 찾기
-            </Link>
-            <span>|</span>
-            <Link href="/find-id" className="hover:text-primary hover:underline">
-              아이디 찾기
-            </Link>
-            <span>|</span>
             <Link href="/signUp" className="hover:text-primary hover:underline">
               회원가입
             </Link>
