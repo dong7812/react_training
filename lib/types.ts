@@ -9,3 +9,13 @@ export interface Article {
   createdAt: string;
   updatedAt: string;
 }
+
+// Comment 타입
+export interface Comment {
+  id: number;
+  articleId: number;
+  author: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
