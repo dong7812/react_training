@@ -9,7 +9,7 @@ interface CommentSectionProps {
 }
 
 export default function CommentSection({ articleId }: CommentSectionProps) {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [comments, setComments] = useState<Comment[]>([]);
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
@@ -90,25 +90,29 @@ export default function CommentSection({ articleId }: CommentSectionProps) {
         댓글 ({comments.length})
       </h2>
 
-      {/* 댓글 작성 폼 */}
-      <form onSubmit={handleSubmit} className="mb-6">
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="댓글을 입력하세요"
-          rows={3}
-          className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
-        />
-        <div className="mt-2 flex justify-end">
-          <button
-            type="submit"
-            disabled={loading || !content.trim()}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
-          >
-            {loading ? '작성 중...' : '댓글 작성'}
-          </button>
-        </div>
-      </form>
+      <>
+        {isAuthenticated ? (
+          // 댓글 작성 폼
+          <form onSubmit={handleSubmit} className="mb-6">
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="댓글을 입력하세요"
+              rows={3}
+              className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
+            />
+            <div className="mt-2 flex justify-end">
+              <button
+                type="submit"
+                disabled={loading || !content.trim()}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors"
+              >
+                {loading ? '작성 중...' : '댓글 작성'}
+              </button>
+            </div>
+          </form>
+        ) : (<></>)}
+      </>
 
       {/* 댓글 목록 */}
       <div className="space-y-4">
