@@ -21,9 +21,17 @@ export default function Navbar() {
             </a>
           </li>
           <li>
+          <>
+          {isAuthenticated ? (
             <a href="/newArticle" className="hover:text-gray-300 transition-colors">
+            글쓰기
+          </a>
+          ) : (
+            <a href="/sign" className="hover:text-gray-300 transition-colors">
               글쓰기
             </a>
+          )}
+          </>
           </li>
 
           {/* 로딩 중이 아닐 때만 표시 */}
